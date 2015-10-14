@@ -36,9 +36,9 @@ public class UserAccess {
 		try {
 			stmt = conn.createStatement();
 			String sql;
-			// sql = "INSERT INTO users (name, username, password) VALUES (\"" + newUser.getName() + "\", \"" + newUser.getUsername() + "\", \"" + newUser.getPassword() + "\");";
+			 sql = "INSERT INTO users (name, username, password) VALUES (\"" + newUser.getName() + "\", \"" + newUser.getUsername() + "\", \"" + newUser.getPassword() + "\");";
 			
-			sql = "INSERT INTO users (name, username, password) VALUES (\"Bilbo!\", \"bilboB\", \"ring\");";
+//			sql = "INSERT INTO users (name, username, password) VALUES (\"Bilbo!\", \"bilboB\", \"ring\");";
 			stmt.executeUpdate(sql);
 			return true;
 
@@ -47,6 +47,37 @@ public class UserAccess {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public User getUser (String inputtedUserName, String inputtedPassword){
+		try {
+			stmt = conn.createStatement();
+			String sql;
+			 sql = "SELECT name, username, password FROM users WHERE username = \"bilboB\" AND password = \"ring\";";
+			 ResultSet rs = stmt.executeQuery(sql);
+
+		      while(rs.next()){
+		         //Retrieve by column name
+		         String name = rs.getString("name");
+		         String username = rs.getString("username");
+		         String password = rs.getString("password");
+
+		         //Display values
+		         System.out.print("name: " + name);
+		         System.out.print(", username: " + username);
+		         System.out.print(", password: " + password);
+		         
+
+				return new User(name, username, password);
+		         
+		      }
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+//		return null;
 	}
 	   	   /*
 	   	    * ResultSet rs = stmt.executeQuery(sql);

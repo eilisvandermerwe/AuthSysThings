@@ -14,7 +14,9 @@ public class AuthSysThings {
 		UserAccess pleasework = new UserAccess();
 		User bilbo = new User("Bilbo", "bilboB", "ring");
 		pleasework.saveUser(bilbo);
+		pleasework.getUser ("bibloB" , "ring");
 		System.out.println(bilbo.getName() + " password: " + bilbo.getPassword());
+		
 	}
 
 }
