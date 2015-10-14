@@ -37,14 +37,11 @@ public class UserAccess {
 		try {
 			stmt = conn.createStatement();
 			String sql;
-			 sql = "INSERT INTO users (name, username, password) VALUES (\"" + newUser.getName() + "\", \"" + newUser.getUsername() + "\", \"" + newUser.getPassword() + "\");";
-			
-//			sql = "INSERT INTO users (name, username, password) VALUES (\"Bilbo!\", \"bilboB\", \"ring\");";
+			sql = "INSERT INTO users (name, username, password) VALUES (\"" + newUser.getName() + "\", \"" + newUser.getUsername() + "\", \"" + newUser.getPassword() + "\");";
 			stmt.executeUpdate(sql);
 			return true;
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -56,22 +53,14 @@ public class UserAccess {
 		try {
 			stmt = conn.createStatement();
 			String sql;
-			 sql = "SELECT name, username, password FROM users WHERE username = \"bilboB\" AND password = \"ring\";";
+			 sql = "SELECT name, username, password FROM users WHERE username = \"" + inputtedUserName + "\" AND password = \""+ inputtedPassword +"\";";
 			 ResultSet rs = stmt.executeQuery(sql);
 			 
-			 
-
 		     if(rs.next()) {
 		         //Retrieve by column name
 		         String name = rs.getString("name");
 		         String username = rs.getString("username");
 		         String password = rs.getString("password");
-
-		         //Display values
-		         System.out.print("name: " + name);
-		         System.out.print(", username: " + username);
-		         System.out.print(", password: " + password);
-		         
 
 				user = new User(name, username, password);
 		         
@@ -80,56 +69,11 @@ public class UserAccess {
 		      }
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return user;
 
 	}
-	   	   /*
-	   	    * ResultSet rs = stmt.executeQuery(sql);
-			
-	   Statement stmt = null;
-
-	      //STEP 4: Execute a query
-	      System.out.println("Creating statement...");
-	      
-	      //STEP 5: Extract data from result set
-	      while(rs.next()){
-	         //Retrieve by column name
-	         int id  = rs.getInt("id");
-	         int age = rs.getInt("age");
-	         String first = rs.getString("first");
-	         String last = rs.getString("last");
-
-	         //Display values
-	         System.out.print("ID: " + id);
-	         System.out.print(", Age: " + age);
-	         System.out.print(", First: " + first);
-	         System.out.println(", Last: " + last);
-	      }
-	      //STEP 6: Clean-up environment
-	      rs.close();
-	      stmt.close();
-	      conn.close();
-	   
-	   }finally{
-	      //finally block used to close resources
-	      try{
-	         if(stmt!=null)
-	            stmt.close();
-	      }catch(SQLException se2){
-	      }// nothing we can do
-	      try{
-	         if(conn!=null)
-	            conn.close();
-	      }catch(SQLException se){
-	         se.printStackTrace();
-	      }//end finally try
-	   }//end try
-	   System.out.println("Goodbye!");
-	}//end main
-	*/
 
 }
