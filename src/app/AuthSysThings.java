@@ -47,7 +47,11 @@ public class AuthSysThings {
 			String password = scanner.nextLine();
 
 			User bilbo = new User(name, username, password);
-			pleasework.saveUser(bilbo);
+			if(pleasework.saveUser(bilbo)){
+				System.out.println("Welcome, "+username);
+			} else{
+				System.out.println("Error, user not created");
+			}
 			
 		} else {
 			// loop round again, idiot!
