@@ -4,7 +4,7 @@ import java.sql.*;
 public class UserAccess {
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost/AuthSysThings";
+	static final String DB_URL = "jdbc:mysql://localhost/AuthSysThing";
 
 	//  Database credentials
 	static final String USER = "root";
@@ -15,7 +15,7 @@ public class UserAccess {
 
 		try{
 			//Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(JDBC_DRIVER);
 
 			//Open a connection
 			System.out.println("Connecting to database...");
@@ -28,6 +28,11 @@ public class UserAccess {
 			//Handle errors for Class.forName
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean saveUser(User newUser){
+		
+		return false;
 	}
 	   	   /*
 	   Statement stmt = null;
