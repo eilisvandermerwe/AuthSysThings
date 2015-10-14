@@ -10,8 +10,10 @@ public class UserAccess {
 	static final String USER = "root";
 	static final String PASS = "ch@ngeme1";
 
+	Connection conn = null;
+	Statement stmt = null;
+	
 	public UserAccess() {
-		Connection conn = null;
 
 		try{
 			//Register JDBC driver
@@ -31,19 +33,29 @@ public class UserAccess {
 	}
 	
 	public boolean saveUser(User newUser){
-		
-		return false;
+		try {
+			stmt = conn.createStatement();
+			String sql;
+			// sql = "INSERT INTO users (name, username, password) VALUES (\"" + newUser.getName() + "\", \"" + newUser.getUsername() + "\", \"" + newUser.getPassword() + "\");";
+			
+			sql = "INSERT INTO users (name, username, password) VALUES (\"Bilbo!\", \"bilboB\", \"ring\");";
+			stmt.executeUpdate(sql);
+			return true;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 	   	   /*
+	   	    * ResultSet rs = stmt.executeQuery(sql);
+			
 	   Statement stmt = null;
 
 	      //STEP 4: Execute a query
 	      System.out.println("Creating statement...");
-	      stmt = conn.createStatement();
-	      String sql;
-	      sql = "SELECT id, first, last, age FROM Employees";
-	      ResultSet rs = stmt.executeQuery(sql);
-
+	      
 	      //STEP 5: Extract data from result set
 	      while(rs.next()){
 	         //Retrieve by column name

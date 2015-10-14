@@ -13,7 +13,7 @@ public class AuthSysThings {
 		System.out.println("If you want to register, press 2");
 		UserAccess pleasework = new UserAccess();
 		User bilbo = new User("Bilbo", "bilboB", "ring");
-		
+		pleasework.saveUser(bilbo);
 		System.out.println(bilbo.getName() + " password: " + bilbo.getPassword());
 	}
 
