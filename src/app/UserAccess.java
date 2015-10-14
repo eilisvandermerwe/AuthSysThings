@@ -1,5 +1,6 @@
 package app;
 import java.sql.*;
+import app.NoUserFoundEx;
 
 public class UserAccess {
 	// JDBC driver name and database URL
@@ -49,14 +50,18 @@ public class UserAccess {
 		}
 	}
 	
-	public User getUser (String inputtedUserName, String inputtedPassword){
+	public User getUser(String inputtedUserName, String inputtedPassword) throws NoUserFoundEx {
+		User user = new User("", "", "");
+		
 		try {
 			stmt = conn.createStatement();
 			String sql;
 			 sql = "SELECT name, username, password FROM users WHERE username = \"bilboB\" AND password = \"ring\";";
 			 ResultSet rs = stmt.executeQuery(sql);
+			 
+			 
 
-		      while(rs.next()){
+		     if(rs.next()) {
 		         //Retrieve by column name
 		         String name = rs.getString("name");
 		         String username = rs.getString("username");
@@ -68,16 +73,19 @@ public class UserAccess {
 		         System.out.print(", password: " + password);
 		         
 
-				return new User(name, username, password);
+				user = new User(name, username, password);
 		         
+		      } else {
+		    	  throw new NoUserFoundEx();
 		      }
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		}
-//		return null;
+		
+		return user;
+
 	}
 	   	   /*
 	   	    * ResultSet rs = stmt.executeQuery(sql);
